@@ -1,0 +1,22 @@
+.logs {
+  font-family: 'Roboto Mono', monospace;
+  margin-bottom: 30px;
+  min-height: 100vh;
+  margin: 30px;
+  padding: 15px;
+  box-sizing: border-box;
+  .logs-table {
+    background: #fff;
+    border: 15px #fff solid;
+    width: 100%;
+    th, td {
+      padding: 15px;
+      border-bottom: 1px #ececec solid;
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+  }
+}

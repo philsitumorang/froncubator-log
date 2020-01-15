@@ -1,0 +1,37 @@
+version: "3"
+services:
+  mongo:
+    env_file:
+      - ./mongo/mongo.env
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    volumes:
+      - ./mongo/data:/data/db
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/public:/frontend/public
+      - ./frontend/src:/frontend/src
+  api:
+    env_file:
+      - ./api/api.env
+      - ./mongo/mongo.env
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - ./api/src:/api/src
+    links:
+      - mongo
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    links:
+      - api
+      - frontend
+    ports:
+      - 3000:80

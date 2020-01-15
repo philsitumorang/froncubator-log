@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.min.js"></script>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        padding: 0; 
+        margin: 0; 
+        font-family: 'Roboo', sans-serif;
+        font-size: 13px;
+      }
+      body {
+        padding: 20px;
+      }
+
+      .log-table {
+        width: 100%;
+      }
+      .log-table td,
+      .log-table th {
+        padding: 10px;
+        border-bottom: 1px #ececec solid;
+        text-align: left;
+      }
+      .pages {
+        text-align: center;
+        padding: 20px;
+      }
+      .main-table {
+        width: 100%;
+      }
+      .main-table td {
+        vertical-align: top;
+      }
+      .filters {
+        position: relative;
+        width: 90%;
+        margin-right: 20px;
+        margin-top: 15px;
+      }
+      .filters b {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      .filters input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: 5px 0;
+        font-size: 14px;
+      }
+      .filters button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        background: #333;
+        color: #fff;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="main-table">
+      <tr>
+        <td width="220">
+          <div class="filters">
+            <div>
+              <b>Filter</b>
+              <button class="clear-filters" type="button">Clear</button>
+            </div>
+            <input type="text" id="type" placeholder="Type" /><br/>
+            <input type="text" id="project" placeholder="Project" /><br/>
+            <input type="text" id="service" placeholder="Service" /><br/>
+            <input type="text" id="message" placeholder="Message" /><br/>
+            <input type="text" id="date" placeholder="Date" /><br/>
+            <button type="button" onClick="setFilter()">Set</button>
+          </div>
+        </td>
+        <td>
+          <table class="log-table" id="log-table">
+          </table>
+          
+          <div class="pages">
+            <a href="/" id="prev">Prev</a>
+            <a href="/" id="next">Next</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      function parseQuery(queryString) {
+          var query = {};
+          var pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+          for (var i = 0; i < pairs.length; i++) {
+              var pair = pairs[i].split('=');
+              query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+          }
+          return query;
+      }
+
+      function setField(query, field, value) {
+        if (value !== undefined && value !== '') {
+          query[field] = value;
+        }
+      }
+
+      function setFilter() {
+        const query = parseQuery(window.location.search);
+        
+        const type = document.querySelector('#type').value;
+        const project = document.querySelector('#project').value;
+        const service = document.querySelector('#service').value;
+        const message = document.querySelector('#message').value;
+        const date = document.querySelector('#date').value;
+
+        setField(query, 'type', type);
+        setField(query, 'project', project);
+        setField(query, 'service', service);
+        setField(query, 'message', message);
+        setField(query, 'date', date);
+
+        window.location.href = `?${new URLSearchParams(query).toString()}`;
+      }
+
+      function pagination() {
+        let prevPage;
+        let page;
+        const query = parseQuery(window.location.search);
+        if (query.page) {
+          page = +query.page;
+          prevPage = page - 1;
+          if (prevPage < 1) {
+            prevPage = 1;
+          }
+        } else {
+          page = 1;
+          prevPage = 1;
+        }
+
+        console.log(query);
+        query.page = prevPage;
+        document.querySelector('#prev').setAttribute('href', `/?${new URLSearchParams(query).toString()}`);
+        query.page = page + 1;
+        document.querySelector('#next').setAttribute('href', `/?${new URLSearchParams(query).toString()}`);
+      }
+
+      async function getLogs() {
+        const query = parseQuery(window.location.search);
+
+        const data = (await axios.get(`/api/logs?${new URLSearchParams(query).toString()}`)).data;
+        let html = `
+          <tr>
+            <th>Type</th>
+            <th>Project</th>
+            <th>Service</th>
+            <th>Message</th>
+            <th>TS</th>
+          </tr>
+        `;
+        for (let log of data.logs) {
+          html += `
+            <tr>
+              <td>${log.type}</td>
+              <td>${log.project}</td>
+              <td>${log.service}</td>
+              <td>${log.message}</td>
+              <td>${log.ts}</td>
+            </tr>
+          `;
+        }
+
+        document.querySelector('#log-table').innerHTML = html;
+      }
+
+      getLogs();
+      pagination();
+    </script>
+  </body>
+</html>

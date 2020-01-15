@@ -1,0 +1,32 @@
+.main {
+  position: relative;
+}
+
+pre {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+}
+
+table {
+  td, th {
+    vertical-align: top;
+  }
+}
+
+.ant-layout {
+  background: #fff;
+}
+
+.ant-layout-content {
+  margin-left: 200px;
+  background: #f4f4f4;
+}
+
+.ant-layout-sider {
+  background: #001529c7;
+}
+
+.sider {
+  position: fixed;
+  height: 100vh;
+}

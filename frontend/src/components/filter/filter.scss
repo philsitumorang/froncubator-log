@@ -1,0 +1,62 @@
+.filter {
+  position: relative;
+  padding: 15px;
+  color: #fff;
+  .form-item {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  b {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .filter-input {
+    background: none;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px #fff solid;
+  }
+}
+
+.filter-buttons {
+  position: relative;
+  text-align: center;
+  .fb-without-bg {
+    padding: 7px 10px !important;
+    background: none !important;
+    font-size: 20px;
+  }
+  .filter-button {
+    position: relative;
+    border: 0;
+    background: #1690ff;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 7px 40px;
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 10px 0;
+  }
+}
+
+.autoload {
+  position: relative;
+  margin: 10px;
+  .ant-checkbox-wrapper {
+    color: #fff !important;
+  }
+}
+
+.filter-input::-webkit-input-placeholder { /* Edge */
+  color: #999;
+}
+
+.filter-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #999;
+}
+
+.filter-input::placeholder {
+  color: #999;
+}
