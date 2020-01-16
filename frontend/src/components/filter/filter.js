@@ -16,7 +16,7 @@ function Filter() {
   useEffect(() => {
     let query = parseQuery(window.location.search);
     setFilterForm(query);
-    switchAutoload({ target: { checked: true } });
+    switchAutoLoad({ target: { checked: true } });
   }, []);
 
   function clearFilter() {
@@ -50,7 +50,7 @@ function Filter() {
     setFilterForm(query);
   }
 
-  function switchAutoload(e) {
+  function switchAutoLoad(e) {
     if (e.target.checked) {
       interval = setInterval(async () => {
         let query = parseQuery(window.location.search);
@@ -63,69 +63,68 @@ function Filter() {
     }
   }
 
+  const filterInputFields = {
+    className: 'filter-input',
+    onChange: onFormHandler,
+    onKeyUp: onEnterSaveFilter
+  };
+
   return (
     <>
       <div className="filter">
         <b>Filters</b>
         <div className="form-item">
           <input
-            className="filter-input"
-            placeholder="Type"
-            name="type"
-            value={filterForm.type || ''}
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            />
+              {...filterInputFields}
+              placeholder="Type"
+              name="type"
+              value={filterForm.type || ''}/>
         </div>
         <div className="form-item">
           <input
-            className="filter-input"
-            placeholder="Header"
-            name="header"
-            value={filterForm.header || ''}
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            />
+              {...filterInputFields}
+              placeholder="Header"
+              name="header"
+              value={filterForm.header || ''}/>
         </div>
         <div className="form-item">
           <input
-            className="filter-input"
-            placeholder="Project"
-            name="project"
-            value={filterForm.project || ''}
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            />
+              {...filterInputFields}
+              placeholder="Project"
+              name="project"
+              value={filterForm.project || ''}/>
         </div>
         <div className="form-item">
           <input
-            className="filter-input"
-            placeholder="Service"
-            name="service"
-            value={filterForm.service || ''}
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            />
+              {...filterInputFields}
+              placeholder="Service"
+              name="service"
+              value={filterForm.service || ''}/>
         </div>
         <div className="form-item">
           <input
-            className="filter-input"
-            placeholder="Message"
-            name="message"
-            value={filterForm.message || ''}
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            />
+              {...filterInputFields}
+              placeholder="Message"
+              name="message"
+              value={filterForm.message || ''}/>
         </div>
         <div className="filter-buttons">
-          <button type="danger" className="filter-button fb-without-bg" onClick={clearFilter}>
+          <button
+              type="danger"
+              className="filter-button fb-without-bg"
+              onClick={clearFilter}>
             <Icon type="delete" />
           </button>
-          <button type="primary" className="filter-button" onClick={saveFilter}>Save</button>
+          <button
+              type="primary"
+              className="filter-button"
+              onClick={saveFilter}>Save</button>
         </div>
       </div>
-      <div className="autoload">
-        <Checkbox checked={isAutoLoad} onChange={switchAutoload}>Autoload</Checkbox>
+      <div className="autoLoad">
+        <Checkbox
+            checked={isAutoLoad}
+            onChange={switchAutoLoad}>AutoLoad</Checkbox>
       </div>
     </>
   )
