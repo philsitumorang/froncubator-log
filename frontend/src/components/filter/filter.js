@@ -55,7 +55,7 @@ function Filter() {
       interval = setInterval(async () => {
         let query = parseQuery(window.location.search);
         await getLogs(dispatch, query);
-      }, 1000);
+      }, 3000);
       setIsAutoLoad(true);
     } else {
       clearInterval(interval);
@@ -70,9 +70,9 @@ function Filter() {
         <div className="form-item">
           <input
             className="filter-input"
-            placeholder="Type" 
-            name="type" 
-            value={filterForm.type || ''} 
+            placeholder="Type"
+            name="type"
+            value={filterForm.type || ''}
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
             />
@@ -80,9 +80,9 @@ function Filter() {
         <div className="form-item">
           <input
             className="filter-input"
-            placeholder="Header" 
-            name="header" 
-            value={filterForm.header || ''} 
+            placeholder="Header"
+            name="header"
+            value={filterForm.header || ''}
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
             />
@@ -90,9 +90,9 @@ function Filter() {
         <div className="form-item">
           <input
             className="filter-input"
-            placeholder="Project" 
-            name="project" 
-            value={filterForm.project || ''} 
+            placeholder="Project"
+            name="project"
+            value={filterForm.project || ''}
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
             />
@@ -100,9 +100,9 @@ function Filter() {
         <div className="form-item">
           <input
             className="filter-input"
-            placeholder="Service" 
-            name="service" 
-            value={filterForm.service || ''} 
+            placeholder="Service"
+            name="service"
+            value={filterForm.service || ''}
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
             />
@@ -110,9 +110,9 @@ function Filter() {
         <div className="form-item">
           <input
             className="filter-input"
-            placeholder="Message" 
-            name="message" 
-            value={filterForm.message || ''} 
+            placeholder="Message"
+            name="message"
+            value={filterForm.message || ''}
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
             />
