@@ -8,7 +8,7 @@ function Stats() {
   const [{ stats }, dispatch] = useGlobalState();
 
   useEffect(() => {
-    getStats(dispatch);
+    getStats(dispatch).then();
   }, []);
 
   return (

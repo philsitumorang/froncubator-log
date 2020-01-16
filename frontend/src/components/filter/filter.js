@@ -9,9 +9,9 @@ let interval;
 
 function Filter() {
 
-  const [isAutoload, setIsAutoLoad] = useState(true);
+  const [isAutoLoad, setIsAutoLoad] = useState(true);
   const [filterForm, setFilterForm] = useState({});
-  const [{ logs }, dispatch] = useGlobalState();
+  const [{}, dispatch] = useGlobalState();
 
   useEffect(() => {
     let query = parseQuery(window.location.search);
@@ -20,8 +20,6 @@ function Filter() {
   }, []);
 
   function clearFilter() {
-    setFilterForm({});
-    getLogs(dispatch, {});
     window.location.href = '/';
   }
 
@@ -48,7 +46,7 @@ function Filter() {
     query = {
       ...query,
       ...form
-    }
+    };
     setFilterForm(query);
   }
 
@@ -77,7 +75,7 @@ function Filter() {
             value={filterForm.type || ''} 
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
-            ></input>
+            />
         </div>
         <div className="form-item">
           <input
@@ -87,7 +85,7 @@ function Filter() {
             value={filterForm.header || ''} 
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
-            ></input>
+            />
         </div>
         <div className="form-item">
           <input
@@ -97,7 +95,7 @@ function Filter() {
             value={filterForm.project || ''} 
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
-            ></input>
+            />
         </div>
         <div className="form-item">
           <input
@@ -107,7 +105,7 @@ function Filter() {
             value={filterForm.service || ''} 
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
-            ></input>
+            />
         </div>
         <div className="form-item">
           <input
@@ -117,18 +115,8 @@ function Filter() {
             value={filterForm.message || ''} 
             onChange={onFormHandler}
             onKeyUp={onEnterSaveFilter}
-            ></input>
+            />
         </div>
-        {/* <div className="form-item">
-          <input
-            className="filter-input"
-            placeholder="TS" 
-            name="TS" 
-            value={filterForm.TS || ''} 
-            onChange={onFormHandler}
-            onKeyUp={onEnterSaveFilter}
-            ></input>
-        </div> */}
         <div className="filter-buttons">
           <button type="danger" className="filter-button fb-without-bg" onClick={clearFilter}>
             <Icon type="delete" />
@@ -137,7 +125,7 @@ function Filter() {
         </div>
       </div>
       <div className="autoload">
-        <Checkbox checked={isAutoload} onChange={switchAutoload}>Autoload</Checkbox>
+        <Checkbox checked={isAutoLoad} onChange={switchAutoload}>Autoload</Checkbox>
       </div>
     </>
   )

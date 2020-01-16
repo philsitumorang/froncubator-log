@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import { logErr, logInfo } from '../modules/logger';
 
 async function connectToDB() {
   try {
@@ -16,10 +15,10 @@ async function connectToDB() {
     setTimeout(() => {
       console.log('Reconnect...');
       connectToDB()
-    }, 5000)
+    }, 5000);
   }
 }
 
 export async function connect() {
   await connectToDB();
-};
+}

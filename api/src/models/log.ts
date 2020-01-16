@@ -13,9 +13,11 @@ export interface ILog extends Document {
   type: string;
   project: string;
   service: string;
-  message: string;
+  message: string|RegExp;
   header: number;
   ts: number;
+  page?: number;
+  limit?: number;
   save(): any;
 };
 

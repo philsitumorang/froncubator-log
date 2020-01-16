@@ -15,7 +15,7 @@ function Logs(props) {
   useEffect(() => {
     query = parseQuery(props.location.search);
     calcPrevNextPages(query);
-    getLogs(dispatch, query);
+    getLogs(dispatch, query).then();
   }, []);
 
   function calcPrevNextPages(query) {
