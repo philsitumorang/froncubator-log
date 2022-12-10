@@ -7,7 +7,7 @@
     "moment": "2.24.0",
     "mongoose": "5.4.19",
     "mongodb": "3.2.5",
-    "express": "4.16.4",
+    "express": "4.17.3",
     "express-joi-validator": "2.0.1",
     "cors": "2.8.5",
     "joi": "14.3.1",
